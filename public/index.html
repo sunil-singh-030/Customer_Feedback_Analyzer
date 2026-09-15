@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Feedback Analyzer - Zscaler AI Product Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="header-titles">
+          <h1>Customer Feedback Analyzer</h1>
+          <p class="subtitle">AI-assisted theme detection, sentiment analysis, urgency scoring, and PM decision prioritization.</p>
+        </div>
+        <div class="mode-badge-container">
+          <span id="modeBadge" class="mode-badge mock-badge">Simulated AI / Rule-based demo</span>
+        </div>
+      </div>
+      <div class="header-notes">
+        <span class="note-item">🔒 All analysis runs in-memory for the current session. Refreshing clears data.</span>
+        <span class="note-item">ℹ️ Classifications & recommendations require PM review.</span>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+      <!-- Input Section -->
+      <section class="card input-section">
+        <div class="card-header">
+          <h2>1. Input Customer Feedback</h2>
+          <span class="limit-info">Max 30 comments | Max 1,000 chars per comment</span>
+        </div>
+        
+        <div class="input-body">
+          <label for="feedbackInput" class="input-label">
+            Enter feedback comments below (one feedback item per line):
+          </label>
+          <textarea 
+            id="feedbackInput" 
+            placeholder="Type or paste feedback here (one comment per line)...&#10;Example: The dashboard takes too long to load when filtering by region."
+            rows="8"
+            aria-label="Customer feedback input text area"
+          ></textarea>
+          
+          <div class="input-meta-row">
+            <div class="counters">
+              <span id="commentCount" class="badge count-badge">0 / 30 comments</span>
+              <span id="charCount" class="badge count-badge">0 / 1,000 chars (current line)</span>
+            </div>
+            
+            <div class="button-group">
+              <button id="btnLoadSample" type="button" class="btn btn-secondary">Load Sample Feedback</button>
+              <button id="btnClear" type="button" class="btn btn-tertiary">Clear</button>
+              <button id="btnAnalyze" type="button" class="btn btn-primary">Analyze Feedback</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Banner Container -->
+        <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+        
+        <!-- Loading State -->
+        <div id="loadingIndicator" class="loading-container hidden">
+          <div class="spinner"></div>
+          <p>Analyzing feedback with AI... Please wait.</p>
+        </div>
+      </section>
+
+      <!-- Empty State Container -->
+      <section id="emptyState" class="card empty-state">
+        <div class="empty-state-content">
+          <div class="empty-icon">📊</div>
+          <h3>No Analysis Results Yet</h3>
+          <p>Click <strong>"Load Sample Feedback"</strong> and then <strong>"Analyze Feedback"</strong> to generate your first product insights dashboard.</p>
+        </div>
+      </section>
+
+      <!-- Analysis Results Section (Hidden until analyzed) -->
+      <div id="resultsContainer" class="results-container hidden">
+
+        <!-- Assessment Answers & PM Executive Summary -->
+        <section class="card pm-summary-section">
+          <div class="card-header border-bottom">
+            <h2>2. PM Insights & Executive Summary</h2>
+            <span class="badge subtitle-badge">Grounding Verified</span>
+          </div>
+
+          <div class="pm-summary-grid">
+            <!-- Assessment Question 1 & 6: Top Pain Points -->
+            <div class="summary-box">
+              <h3>Q1 & Q6. Top Customer Pain Points</h3>
+              <div id="painPointsList" class="insights-list"></div>
+            </div>
+
+            <!-- Assessment Question 7: Prioritized Product Improvements -->
+            <div class="summary-box">
+              <h3>Q7. Recommended Product Improvements (Priority Order)</h3>
+              <div id="recommendationsList" class="insights-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dashboard Metrics (Question 3 & 4) -->
+        <section class="card dashboard-section">
+          <div class="card-header border-bottom">
+            <h2>3. Overview Metrics & Distributions</h2>
+            <span id="totalItemsBadge" class="badge count-badge">Total Analyzed: 0</span>
+          </div>
+
+          <div class="metrics-grid">
+            <!-- Q4: Sentiment Distribution -->
+            <div class="metric-card">
+              <h3>Q4. Sentiment Distribution</h3>
+              <div id="sentimentDistribution" class="distribution-bars"></div>
+            </div>
+
+            <!-- Urgency Breakdown -->
+            <div class="metric-card">
+              <h3>Urgency Breakdown</h3>
+              <div id="urgencyDistribution" class="distribution-bars"></div>
+            </div>
+
+            <!-- Q3: Theme Frequencies -->
+            <div class="metric-card full-width-card">
+              <h3>Q3. Most Frequent Themes</h3>
+              <div id="themeDistribution" class="theme-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- High-Urgency Feedback (Question 2) -->
+        <section class="card high-urgency-section">
+          <div class="card-header border-bottom">
+            <h2>Q2. High-Urgency Feedback</h2>
+            <span id="highUrgencyBadge" class="badge badge-high">0 High Urgency</span>
+          </div>
+          <div id="highUrgencyList" class="urgent-cards-list"></div>
+        </section>
+
+        <!-- Blockers & Potential Churn Signals (Question 5) -->
+        <section class="card blockers-section">
+          <div class="card-header border-bottom">
+            <h2>Q5. Potential Churn & Rollout Blockers</h2>
+            <span id="blockersBadge" class="badge badge-warning">0 Blockers/Signals</span>
+          </div>
+          <p class="policy-note">
+            ⚠️ <strong>Policy Notice:</strong> Potential churn is identified ONLY from explicit cancellation language. Workflow/Rollout blockers represent interrupted tasks or enterprise deployment prerequisites.
+          </p>
+          <div id="blockersList" class="blockers-cards-list"></div>
+        </section>
+
+        <!-- Individual Feedback Table (Section B) -->
+        <section class="card table-section">
+          <div class="card-header border-bottom">
+            <h2>4. Individual Item Classifications</h2>
+            <span class="table-subtitle">All original comments with AI / rule classifications</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="feedback-table">
+              <thead>
+                <tr>
+                  <th style="width: 55px;">ID</th>
+                  <th style="width: 32%;">Original Customer Comment</th>
+                  <th style="width: 110px;">Theme</th>
+                  <th style="width: 100px;">Sentiment</th>
+                  <th style="width: 90px;">Urgency</th>
+                  <th style="width: 140px;">Signal</th>
+                  <th>Classification Reason</th>
+                </tr>
+              </thead>
+              <tbody id="feedbackTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Technical & Classification Policy Footnote -->
+        <footer class="card policy-footnote">
+          <h4>Classification Policy & Assumptions</h4>
+          <ul>
+            <li><strong>Theme:</strong> Assigned single dominant theme from Performance, Usability, Authentication, Reporting, Search, Pricing, Onboarding, Other.</li>
+            <li><strong>Sentiment:</strong> Positive (praise/satisfaction), Negative (dissatisfaction/issues), Neutral (requests/observations without strong emotion).</li>
+            <li><strong>Urgency:</strong> High (blocked core workflow / rollout blocker), Medium (meaningful friction without total blockage), Low (praise / non-blocking suggestion).</li>
+            <li><strong>Deterministic Metrics:</strong> All dashboard counts, percentages, and theme totals are calculated in JavaScript from item classifications.</li>
+          </ul>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

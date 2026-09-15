@@ -1,0 +1,15 @@
+{
+  "name": "feedback-analyzer",
+  "version": "1.0.0",
+  "description": "Customer Feedback Analyzer for Zscaler AI Product Builder Assessment",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/validation.test.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
