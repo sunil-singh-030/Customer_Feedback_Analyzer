@@ -33,8 +33,11 @@ This document records how AI tools were utilized during the design, development,
 
 ## 4. Observed Errors, Vague Suggestions & Applied Corrections
 
+
+
 | Observed Issue | Root Cause | Applied Correction |
 | :--- | :--- | :--- |
+| **Wrong chronological order of sections** | Ordering was incorrect in given prompt | I provide correct ordering of sections. |
 | **Tool Path Error during file creation** | Attempted to pass `ArtifactMetadata` to project source code files (`package.json`). | Corrected tool call parameters by omitting `ArtifactMetadata` for standard workspace project files. |
 | **Risk of Unverified AI Counts** | Initial prompt structure allowed AI to return total counts for dashboard cards. | Restructured pipeline so AI returns *only* item classifications; JavaScript computes all counts, percentages, and theme totals deterministically. |
 | **Silent API Fallback Risk** | Common recommendation was to silently switch to mock mode if live AI failed. | Enforced prompt policy: If `AI_MODE=live` and the API call fails or times out, return a clear error message to the user rather than hiding the failure behind mock data. |
