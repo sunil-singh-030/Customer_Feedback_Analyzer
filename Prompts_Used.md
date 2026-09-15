@@ -14,5 +14,10 @@
 > **Prompt:**
 > "Give me 10 such feedback comment for zscaler zero trust exchange platform in such a way so that it is diificult to categories whether provided comments sentiments are positive or negative. like use "not bad" and similar confusing words"
 
+> **Prompt:**
+> "currently ordering of section is wrong. I am sharing you the correct ordering, change it ccordingly. keep the top section (Customer Feedback Analyzer) and bottom one (Classification Policy & Assumptions) as it is, for rest i am sharing you correct ordering. 1 :- Input Customer Feedback, 2 :-  Individual Item Classifications, 3 :-  Overview Metrics & Distributions, 4 :- PM Insights & Executive Summary, 5 :-  High-Urgency Feedback, 6 :- Potential Churn & Rollout Blockers.  also remove Q1, Q6 such type of things"
+
+> **Prompt:**
+> "In .env file what does it mean by mock and live option. also, how does the project works in each case"
 
 ---
