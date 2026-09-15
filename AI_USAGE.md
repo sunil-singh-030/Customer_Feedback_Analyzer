@@ -48,9 +48,10 @@ This document records how AI tools were utilized during the design, development,
 
 All AI-generated code and system outputs were verified using a 3-layer validation strategy:
 
-1. **Automated Unit Testing**:
-   - Executed `npm test` using Node's built-in test runner.
-   - 10 out of 10 test cases passed cleanly.
+1. **Gave confusing comments to test correctness**:
+   - Generated 10 feedback comments for **ZSCALER's Zero Trust Exchange plaform**.
+   - Like positive and negative words in same comment. **("not bad","saves time but")**.
+   - Than pasted these comments to check correctness and accuracy of logic used.
 
 2. **Schema Integrity Enforcement (`validateAnalysisOutput`)**:
    - Programmatically verifies that every input comment ID (1 to N) is present exactly once.
