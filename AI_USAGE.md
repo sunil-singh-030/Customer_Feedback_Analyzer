@@ -75,8 +75,3 @@ All AI-generated code and system outputs were verified using a 3-layer validatio
 
 ---
 
-## 7. Developer Notes & Candidate Personal Observations
-
-*(This section is reserved for developer notes during live review)*
-- The dual-mode architecture (`AI_MODE=mock` vs `AI_MODE=live`) ensures the application is 100% testable out of the box without requiring external API keys.
-- The 45-second finite timeout prevents hanging browser sessions during network degradation.
