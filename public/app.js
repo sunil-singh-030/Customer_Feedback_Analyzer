@@ -198,20 +198,20 @@ function renderResults(data) {
     commentMap[c.id] = c.text;
   });
 
-  // 1. Calculate Deterministic Dashboard Metrics
+  // 1. Render Individual Item Classifications Table (Section 2)
+  renderFeedbackTable(items, commentMap);
+
+  // 2. Render Deterministic Overview Metrics & Distributions (Section 3)
   renderDeterministicDashboard(items);
 
-  // 2. Render PM Insights (Q1, Q6, Q7)
+  // 3. Render PM Insights & Executive Summary (Section 4)
   renderPMInsights(analysis, commentMap);
 
-  // 3. Render High-Urgency Items (Q2)
+  // 4. Render High-Urgency Items (Section 5)
   renderHighUrgencyList(items, commentMap);
 
-  // 4. Render Blockers & Potential Churn Signals (Q5)
+  // 5. Render Blockers & Potential Churn Signals (Section 6)
   renderBlockersList(items, commentMap);
-
-  // 5. Render Individual Items Classification Table
-  renderFeedbackTable(items, commentMap);
 }
 
 /**
@@ -234,7 +234,7 @@ function renderDeterministicDashboard(items) {
     themes[item.theme] = (themes[item.theme] || 0) + 1;
   });
 
-  // Render Sentiment Bars (Q4)
+  // Render Sentiment Bars
   sentimentDistribution.replaceChildren();
   ['Positive', 'Neutral', 'Negative'].forEach((sentKey) => {
     const count = sentiments[sentKey];
@@ -294,7 +294,7 @@ function renderDeterministicDashboard(items) {
     urgencyDistribution.appendChild(row);
   });
 
-  // Render Theme Grid (Q3)
+  // Render Theme Grid
   themeDistribution.replaceChildren();
   const sortedThemes = Object.entries(themes).sort((a, b) => b[1] - a[1]);
   sortedThemes.forEach(([themeName, count]) => {
@@ -317,7 +317,7 @@ function renderDeterministicDashboard(items) {
 }
 
 /**
- * Renders Grounded PM Insights & Recommendations (Q1, Q6, Q7).
+ * Renders Grounded PM Insights & Recommendations.
  */
 function renderPMInsights(analysis, commentMap) {
   // Top Customer Pain Points
@@ -353,7 +353,7 @@ function renderPMInsights(analysis, commentMap) {
     painPointsList.appendChild(card);
   });
 
-  // Recommended Product Improvements in Priority Order (Q7)
+  // Recommended Product Improvements in Priority Order
   recommendationsList.replaceChildren();
   // Sort recommendations: High -> Medium -> Low
   const priorityOrder = { High: 1, Medium: 2, Low: 3 };
@@ -409,7 +409,7 @@ function renderPMInsights(analysis, commentMap) {
 }
 
 /**
- * Renders High-Urgency Feedback Section (Q2).
+ * Renders High-Urgency Feedback Section.
  */
 function renderHighUrgencyList(items, commentMap) {
   highUrgencyList.replaceChildren();
@@ -460,7 +460,7 @@ function renderHighUrgencyList(items, commentMap) {
 }
 
 /**
- * Renders Blockers & Churn Signals Section (Q5).
+ * Renders Blockers & Churn Signals Section.
  */
 function renderBlockersList(items, commentMap) {
   blockersList.replaceChildren();
@@ -511,7 +511,7 @@ function renderBlockersList(items, commentMap) {
 }
 
 /**
- * Renders Individual Classification Table (Section B).
+ * Renders Individual Classification Table.
  */
 function renderFeedbackTable(items, commentMap) {
   feedbackTableBody.replaceChildren();

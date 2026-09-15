@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="app-container">
-    <!-- Header -->
+    <!-- Header (Top Section - Kept As Is) -->
     <header class="app-header">
       <div class="header-content">
         <div class="header-titles">
@@ -27,7 +27,7 @@
 
     <!-- Main Content Grid -->
     <main class="main-content">
-      <!-- Input Section -->
+      <!-- Section 1: Input Customer Feedback -->
       <section class="card input-section">
         <div class="card-header">
           <h2>1. Input Customer Feedback</h2>
@@ -81,81 +81,10 @@
       <!-- Analysis Results Section (Hidden until analyzed) -->
       <div id="resultsContainer" class="results-container hidden">
 
-        <!-- Assessment Answers & PM Executive Summary -->
-        <section class="card pm-summary-section">
-          <div class="card-header border-bottom">
-            <h2>2. PM Insights & Executive Summary</h2>
-            <span class="badge subtitle-badge">Grounding Verified</span>
-          </div>
-
-          <div class="pm-summary-grid">
-            <!-- Assessment Question 1 & 6: Top Pain Points -->
-            <div class="summary-box">
-              <h3>Q1 & Q6. Top Customer Pain Points</h3>
-              <div id="painPointsList" class="insights-list"></div>
-            </div>
-
-            <!-- Assessment Question 7: Prioritized Product Improvements -->
-            <div class="summary-box">
-              <h3>Q7. Recommended Product Improvements (Priority Order)</h3>
-              <div id="recommendationsList" class="insights-list"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Dashboard Metrics (Question 3 & 4) -->
-        <section class="card dashboard-section">
-          <div class="card-header border-bottom">
-            <h2>3. Overview Metrics & Distributions</h2>
-            <span id="totalItemsBadge" class="badge count-badge">Total Analyzed: 0</span>
-          </div>
-
-          <div class="metrics-grid">
-            <!-- Q4: Sentiment Distribution -->
-            <div class="metric-card">
-              <h3>Q4. Sentiment Distribution</h3>
-              <div id="sentimentDistribution" class="distribution-bars"></div>
-            </div>
-
-            <!-- Urgency Breakdown -->
-            <div class="metric-card">
-              <h3>Urgency Breakdown</h3>
-              <div id="urgencyDistribution" class="distribution-bars"></div>
-            </div>
-
-            <!-- Q3: Theme Frequencies -->
-            <div class="metric-card full-width-card">
-              <h3>Q3. Most Frequent Themes</h3>
-              <div id="themeDistribution" class="theme-grid"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- High-Urgency Feedback (Question 2) -->
-        <section class="card high-urgency-section">
-          <div class="card-header border-bottom">
-            <h2>Q2. High-Urgency Feedback</h2>
-            <span id="highUrgencyBadge" class="badge badge-high">0 High Urgency</span>
-          </div>
-          <div id="highUrgencyList" class="urgent-cards-list"></div>
-        </section>
-
-        <!-- Blockers & Potential Churn Signals (Question 5) -->
-        <section class="card blockers-section">
-          <div class="card-header border-bottom">
-            <h2>Q5. Potential Churn & Rollout Blockers</h2>
-            <span id="blockersBadge" class="badge badge-warning">0 Blockers/Signals</span>
-          </div>
-          <p class="policy-note">
-            ⚠️ <strong>Policy Notice:</strong> Potential churn is identified ONLY from explicit cancellation language. Workflow/Rollout blockers represent interrupted tasks or enterprise deployment prerequisites.
-          </p>
-          <div id="blockersList" class="blockers-cards-list"></div>
-        </section>
-
-        <!-- Individual Feedback Table (Section B) -->
+        <!-- Section 2: Individual Item Classifications -->
         <section class="card table-section">
           <div class="card-header border-bottom">
-            <h2>4. Individual Item Classifications</h2>
+            <h2>2. Individual Item Classifications</h2>
             <span class="table-subtitle">All original comments with AI / rule classifications</span>
           </div>
           <div class="table-wrapper">
@@ -176,7 +105,78 @@
           </div>
         </section>
 
-        <!-- Technical & Classification Policy Footnote -->
+        <!-- Section 3: Overview Metrics & Distributions -->
+        <section class="card dashboard-section">
+          <div class="card-header border-bottom">
+            <h2>3. Overview Metrics & Distributions</h2>
+            <span id="totalItemsBadge" class="badge count-badge">Total Analyzed: 0</span>
+          </div>
+
+          <div class="metrics-grid">
+            <!-- Sentiment Distribution -->
+            <div class="metric-card">
+              <h3>Sentiment Distribution</h3>
+              <div id="sentimentDistribution" class="distribution-bars"></div>
+            </div>
+
+            <!-- Urgency Breakdown -->
+            <div class="metric-card">
+              <h3>Urgency Breakdown</h3>
+              <div id="urgencyDistribution" class="distribution-bars"></div>
+            </div>
+
+            <!-- Most Frequent Themes -->
+            <div class="metric-card full-width-card">
+              <h3>Most Frequent Themes</h3>
+              <div id="themeDistribution" class="theme-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: PM Insights & Executive Summary -->
+        <section class="card pm-summary-section">
+          <div class="card-header border-bottom">
+            <h2>4. PM Insights & Executive Summary</h2>
+            <span class="badge subtitle-badge">Grounding Verified</span>
+          </div>
+
+          <div class="pm-summary-grid">
+            <!-- Top Customer Pain Points -->
+            <div class="summary-box">
+              <h3>Top Customer Pain Points</h3>
+              <div id="painPointsList" class="insights-list"></div>
+            </div>
+
+            <!-- Prioritized Product Improvements -->
+            <div class="summary-box">
+              <h3>Recommended Product Improvements (Priority Order)</h3>
+              <div id="recommendationsList" class="insights-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: High-Urgency Feedback -->
+        <section class="card high-urgency-section">
+          <div class="card-header border-bottom">
+            <h2>5. High-Urgency Feedback</h2>
+            <span id="highUrgencyBadge" class="badge badge-high">0 High Urgency</span>
+          </div>
+          <div id="highUrgencyList" class="urgent-cards-list"></div>
+        </section>
+
+        <!-- Section 6: Potential Churn & Rollout Blockers -->
+        <section class="card blockers-section">
+          <div class="card-header border-bottom">
+            <h2>6. Potential Churn & Rollout Blockers</h2>
+            <span id="blockersBadge" class="badge badge-warning">0 Blockers/Signals</span>
+          </div>
+          <p class="policy-note">
+            ⚠️ <strong>Policy Notice:</strong> Potential churn is identified ONLY from explicit cancellation language. Workflow/Rollout blockers represent interrupted tasks or enterprise deployment prerequisites.
+          </p>
+          <div id="blockersList" class="blockers-cards-list"></div>
+        </section>
+
+        <!-- Bottom Section: Classification Policy & Assumptions (Kept As Is) -->
         <footer class="card policy-footnote">
           <h4>Classification Policy & Assumptions</h4>
           <ul>
