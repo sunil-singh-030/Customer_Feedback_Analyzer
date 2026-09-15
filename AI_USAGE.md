@@ -5,9 +5,9 @@ This document records how AI tools were utilized during the design, development,
 ---
 
 ## 1. AI Tools Used During Development
-
 - **Primary Development Assistant**: Antigravity AI Agent (powered by Gemini 3.6 Flash model).
 - **Runtime AI Provider**: OpenAI-compatible REST API (`gpt-4o-mini` / configurable via `.env`).
+- For **overview, suggestions, writing detailed prompt for Antigravity** I used **ChatGPT**.
 
 ---
 
@@ -19,8 +19,7 @@ This document records how AI tools were utilized during the design, development,
 ### Task 2: Grounded JSON Schema & System Prompt Safeguards
 > *"Design a system prompt for feedback classification. Protect against prompt injection by treating comments as untrusted data. Require structured JSON output containing items, painPoints, and recommendations, with all pain points referencing original feedback IDs."*
 
-### Task 3: Unit Testing Suite
-> *"Create unit tests using Node.js built-in test runner (node:test) to test input comment validation, schema integrity checks (missing IDs, duplicate IDs, bad enums), and mock analyzer logic."*
+
 
 ---
 
